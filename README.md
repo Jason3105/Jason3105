@@ -194,40 +194,6 @@ const jason = {
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
-## 🏆 Trophies
-
-<div align="center">
-
-[![trophy](https://github-profile-trophy.vercel.app/?username=Jason3105&theme=tokyonight&margin-w=8&margin-h=8&column=4)](https://github.com/Jason3105)
-
-</div>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
-
-## 📊 Most Active Repos
-
-<div align="center">
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jason3105&theme=tokyonight&hide_border=true&layout=donut&langs_count=8&bg_color=1a1b27&title_color=00d9ff&text_color=a9b1d6)](https://github.com/Jason3105)
-
-</div>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
-
-## 📚 Recent Activity
-
-<div align="center">
-
-<!-- RECENT_COMMITS_START -->
-
-> _Run the update-readme workflow to load recent commit activity_
-
-<!-- RECENT_COMMITS_END -->
-
-</div>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
-
 ## 💭 Mindset
 
 <div align="center">

@@ -1,33 +1,47 @@
-name: 🐍 Contribution Snake
+name: Generate Snake Animation
 
+# Controls when the action will run
 on:
+  # Run automatically every 12 hours
   schedule:
-    - cron: "0 0 * * *"   # daily at 00:00 UTC
+    - cron: "0 */12 * * *"
+  
+  # Allows manual trigger from the Actions tab
+  workflow_dispatch:
+  
+  # Run on every push to main/master branch
   push:
-    branches: [main]      # also run on every push so SVG exists from day 1
-  workflow_dispatch:        # manual trigger from Actions tab
+    branches:
+      - main
+      - master
 
 jobs:
-  generate-snake:
-    name: Generate snake animation
-    runs-on: ubuntu-latest
+  generate:
     permissions:
       contents: write
-
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
     steps:
-      - name: 🐍 Generate snake SVGs
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      # Step 2: Generate snake animation
+      - name: Generate github-contribution-grid-snake.svg
         uses: Platane/snk@v3
         with:
           github_user_name: Jason3105
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-
-      - name: 🚀 Push to output branch
-        uses: crazy-max/ghaction-github-pages@v4
+            dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
+      
+      # Step 3: Push to output branch
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
-          commit_message: "chore(snake): regenerate contribution snake"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

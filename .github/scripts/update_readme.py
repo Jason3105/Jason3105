@@ -246,15 +246,7 @@ def main():
     )
     print("→ Injected PLAYGROUND section")
 
-    # 5. Inject RECENT_COMMITS section
-    commits_md = build_recent_commits(recent_events)
-    readme = inject_section(
-        readme,
-        "<!-- RECENT_COMMITS_START -->",
-        "<!-- RECENT_COMMITS_END -->",
-        commits_md,
-    )
-    print("\u2192 Injected RECENT_COMMITS section")
+    # 5. (Removed RECENT_COMMITS injection)
 
     # 6. Write README back
     with open(README_PATH, "w", encoding="utf-8") as f:
