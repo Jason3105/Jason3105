@@ -120,19 +120,7 @@ const jason = {
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
-## 🌟 Playground
 
-<div align="center">
-
-<!-- PLAYGROUND_START -->
-
-> 🔄 _Pinned repositories are fetched automatically by the **update-readme** workflow — push to main to trigger it!_
-
-<!-- PLAYGROUND_END -->
-
-</div>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
 ## 📊 GitHub Stats
 
