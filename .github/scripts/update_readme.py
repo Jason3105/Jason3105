@@ -172,11 +172,33 @@ def build_recent_commits(contributions: list) -> str:
 def main():
     print(f"[{datetime.now(IST).strftime('%d %b %Y %I:%M %p IST')}] Updating README…\n")
 
-    # 1. Fetch pinned repos
+    # 1. Fetch pinned repos via GraphQL
     print("→ Fetching pinned repositories via GraphQL…")
     pinned_data = graphql(PINNED_REPOS_QUERY)
     repos       = pinned_data.get("user", {}).get("pinnedItems", {}).get("nodes", [])
     print(f"  Found {len(repos)} pinned repos")
+
+    # FALLBACK: if no pinned repos, use top 6 own repos sorted by stars
+    if not repos:
+        print("  ⚠️  No pinned repos found — falling back to top repos by stars…")
+        raw = rest(f"/users/{USERNAME}/repos?sort=stars&per_page=20&type=owner")
+        repos = [
+            {
+                "name":            r["name"],
+                "description":     r.get("description") or "",
+                "url":             r["html_url"],
+                "stargazerCount":  r["stargazers_count"],
+                "forkCount":       r["forks_count"],
+                "homepageUrl":     r.get("homepage") or "",
+                "updatedAt":       r["updated_at"],
+                "primaryLanguage": {"name": r["language"], "color": "#58a6ff"}
+                                   if r.get("language") else None,
+                "repositoryTopics": {"nodes": []},
+            }
+            for r in raw
+            if not r["fork"] and r["name"] != USERNAME   # skip forks & profile repo
+        ][:6]
+        print(f"  Using {len(repos)} top repos as fallback")
 
     # 2. Fetch recent commit contributions
     print("→ Fetching recent commit contributions…")

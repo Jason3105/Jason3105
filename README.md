@@ -10,14 +10,15 @@
 
 <br>
 
-```ascii
-╔══════════════════════════════════════════════════════════════╗
-║  🎓 Computer Engineering @ Fr.CRCE, Mumbai  ·  Batch 2027  ║
-║  ⛓️  Blockchain Honours  ·  Ethereum  ·  Solana             ║
-║  💻 Full Stack  ·  🤖 AI/ML  ·  🔐 Web3                    ║
-║  📍 Vasai, Maharashtra, India                               ║
-╚══════════════════════════════════════════════════════════════╝
-```
+<p>
+🎓 <strong>Computer Engineering @ Fr.CRCE, Mumbai</strong> &nbsp;·&nbsp; <strong>Batch 2027</strong>
+<br>
+⛓️ <strong>Blockchain Honours</strong> &nbsp;·&nbsp; Ethereum &nbsp;·&nbsp; Solana
+<br>
+💻 <strong>Full Stack</strong> &nbsp;·&nbsp; 🤖 <strong>AI / ML</strong> &nbsp;·&nbsp; 🔐 <strong>Web3</strong>
+<br>
+📍 Vasai, Maharashtra, India
+</p>
 
 <br>
 
@@ -197,17 +198,17 @@ const jason = {
 
 <div align="center">
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=Jason3105&theme=tokyonight&no-frame=true&no-bg=true&margin-w=6&column=7)](https://github.com/Jason3105)
+[![trophy](https://github-profile-trophy.vercel.app/?username=Jason3105&theme=tokyonight&margin-w=8&margin-h=8&column=4)](https://github.com/Jason3105)
 
 </div>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
-## 🌟 Top Contributed Repos
+## 📊 Most Active Repos
 
 <div align="center">
 
-![](https://github-contributor-stats.vercel.app/api?username=Jason3105&limit=5&theme=tokyonight&combine_all_yearly_contributions=true)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jason3105&theme=tokyonight&hide_border=true&layout=donut&langs_count=8&bg_color=1a1b27&title_color=00d9ff&text_color=a9b1d6)](https://github.com/Jason3105)
 
 </div>
 
