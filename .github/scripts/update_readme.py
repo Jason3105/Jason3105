@@ -61,6 +61,9 @@ RECENT_COMMITS_QUERY = """
 }
 """ % USERNAME
 
+# Not used now — kept as reference
+# We use the Events REST API instead for truly recent data
+
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 def graphql(query: str) -> dict:
@@ -146,26 +149,50 @@ def build_playground(repos: list) -> str:
     return "\n".join(lines)
 
 
-def build_recent_commits(contributions: list) -> str:
-    if not contributions:
-        return "> _No recent commit activity found._"
+# ─── Recent activity via Events API ─────────────────────────────────────────
+def get_recent_events() -> list:
+    """Fetch recent push events via REST Events API — truly current data."""
+    try:
+        events = rest(f"/users/{USERNAME}/events?per_page=100")
+    except Exception as e:
+        print(f"  Error fetching events: {e}")
+        return []
+
+    seen: dict = {}
+    for event in events:
+        if event["type"] != "PushEvent":
+            continue
+        full_name  = event["repo"]["name"]           # e.g. Jason3105/Authblock
+        short_name = full_name.split("/")[-1]
+        if short_name in seen or short_name == USERNAME:
+            continue
+        seen[short_name] = {
+            "name":         short_name,
+            "url":          f"https://github.com/{full_name}",
+            "commit_count": len(event["payload"].get("commits", [])),
+            "occurred_at":  event["created_at"],
+        }
+        if len(seen) >= 5:
+            break
+
+    return list(seen.values())
+
+
+def build_recent_commits(recent_events: list) -> str:
+    if not recent_events:
+        return "> _No recent push activity found._"
 
     lines = []
-    for item in contributions[:5]:
-        repo_name   = item["repository"]["name"]
-        repo_url    = item["repository"]["url"]
-        nodes       = item["contributions"]["nodes"]
-        if not nodes:
-            continue
-        count       = nodes[0]["commitCount"]
-        occurred    = time_ago(nodes[0]["occurredAt"])
+    for item in recent_events:
+        count    = item["commit_count"]
+        occurred = time_ago(item["occurred_at"])
         lines.append(
-            f"- [`{repo_name}`]({repo_url}) &nbsp;·&nbsp; "
+            f"- [`{item['name']}`]({item['url']}) &nbsp;·&nbsp; "
             f"**{count}** commit{'s' if count != 1 else ''} &nbsp;·&nbsp; "
             f"<sub>{occurred}</sub>"
         )
 
-    return "\n".join(lines) if lines else "> _No recent commit activity found._"
+    return "\n".join(lines)
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
@@ -200,16 +227,10 @@ def main():
         ][:6]
         print(f"  Using {len(repos)} top repos as fallback")
 
-    # 2. Fetch recent commit contributions
-    print("→ Fetching recent commit contributions…")
-    commit_data   = graphql(RECENT_COMMITS_QUERY)
-    contributions = (
-        commit_data
-        .get("user", {})
-        .get("contributionsCollection", {})
-        .get("commitContributionsByRepository", [])
-    )
-    print(f"  Found {len(contributions)} repos with recent commits")
+    # 2. Fetch RECENT activity via Events API (truly current)
+    print("\u2192 Fetching recent push events via Events API\u2026")
+    recent_events = get_recent_events()
+    print(f"  Found {len(recent_events)} repos with recent pushes")
 
     # 3. Read README
     with open(README_PATH, "r", encoding="utf-8") as f:
@@ -226,14 +247,14 @@ def main():
     print("→ Injected PLAYGROUND section")
 
     # 5. Inject RECENT_COMMITS section
-    commits_md = build_recent_commits(contributions)
+    commits_md = build_recent_commits(recent_events)
     readme = inject_section(
         readme,
         "<!-- RECENT_COMMITS_START -->",
         "<!-- RECENT_COMMITS_END -->",
         commits_md,
     )
-    print("→ Injected RECENT_COMMITS section")
+    print("\u2192 Injected RECENT_COMMITS section")
 
     # 6. Write README back
     with open(README_PATH, "w", encoding="utf-8") as f:

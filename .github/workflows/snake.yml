@@ -3,6 +3,8 @@ name: 🐍 Contribution Snake
 on:
   schedule:
     - cron: "0 0 * * *"   # daily at 00:00 UTC
+  push:
+    branches: [main]      # also run on every push so SVG exists from day 1
   workflow_dispatch:        # manual trigger from Actions tab
 
 jobs:

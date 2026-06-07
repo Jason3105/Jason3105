@@ -241,7 +241,7 @@ const jason = {
 
 <br>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=4000&pause=2000&color=A9B1D6&center=true&vCenter=true&width=600&lines=🌱+Stay+curious.+Keep+exploring.+Build+together." />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=2000&color=A9B1D6&center=true&vCenter=true&width=650&lines=Stay+curious.+Keep+exploring.+Build+together." />
 
 </div>
 
